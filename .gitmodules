@@ -1,0 +1,3 @@
+[submodule "thirtParts/CMake-GitVersion"]
+	path = thirtParts/CMake-GitVersion
+	url = https://github.com/jahnf/CMake-GitVersion.git

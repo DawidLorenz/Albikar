@@ -1,0 +1,27 @@
+/**
+ * ************************************************************************
+ * @copyright Copyright (c) 2024 Dawid Lorenz Development
+ * ************************************************************************
+ */
+#include "@PREFIX@-Version.h"
+
+#include <Logger.h>
+
+namespace albikar::core::version {
+    auto VersionLogFullVersion() -> void {
+        LOG_INFO("Program: {}", VersionProgramName());
+        LOG_INFO("-- Version: {}.{}.{}", VersionMajor(), VersionMinor(), VersionPatch());
+        LOG_INFO("-- Branch: {}", VersionBranch());
+    }
+    auto VersionProgramName() -> const char* { return "@PREFIX@"; }
+    auto VersionString() -> const char* { return "@VERSION_STRING@"; }
+    auto VersionMajor() -> unsigned int { return @VERSION_MAJOR@; }
+    auto VersionMinor() -> unsigned int { return @VERSION_MINOR@; }
+    auto VersionPatch() -> unsigned int { return @VERSION_PATCH@; }
+    auto VersionFlag() -> const char* { return "@VERSION_FLAG@"; }
+    auto VersionDistance() -> unsigned int { return @VERSION_DISTANCE@; }
+    auto VersionShorthash() -> const char* { return "@VERSION_SHORTHASH@"; }
+    auto VersionFullhash() -> const char* { return "@VERSION_FULLHASH@"; }
+    auto VersionIsdirty() -> bool { return @VERSION_ISDIRTY@; }
+    auto VersionBranch() -> const char* { return "@VERSION_BRANCH@"; }
+}  // namespace albikar::core::version
