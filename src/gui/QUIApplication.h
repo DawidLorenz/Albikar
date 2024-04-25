@@ -5,24 +5,23 @@
  */
 #pragma once
 
+#include <QObject>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+
+#include <memory>
+
 namespace albikar::gui {
 class QUIApplication {
  public:
-  static auto Get() -> QUIApplication&;
-  static auto CreateApp(int argc, char* argv[]) -> QUIApplication&;
+  explicit QUIApplication(int& argc, char** argv);
+  ~QUIApplication();
 
  public:
   auto Start() -> void;
   auto Stop() -> void;
 
  private:
-  explicit QUIApplication();
-  ~QUIApplication();
-
- public:
-  QUIApplication(const QUIApplication&) = delete;
-  QUIApplication(QUIApplication&&) = delete;
-  auto operator=(const QUIApplication&) -> QUIApplication& = delete;
-  auto operator=(const QUIApplication&&) -> QUIApplication& = delete;
+  std::unique_ptr<QGuiApplication> qt_qui_app_;
 };
 }  // namespace albikar::gui

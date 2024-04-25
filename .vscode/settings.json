@@ -63,7 +63,8 @@
         "semaphore": "cpp",
         "sstream": "cpp",
         "stop_token": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "qqmlapplicationengine": "cpp"
     },
     "C_Cpp.clang_format_style": "file",
     "editor.formatOnSave": false,
@@ -71,5 +72,8 @@
         "google-*",
         "modernize-*"
     ],
-    "C_Cpp.codeAnalysis.clangTidy.enabled": true
+    "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+    "terminal.integrated.env.linux": {
+        "GTK_PATH": ""
+    }
 }

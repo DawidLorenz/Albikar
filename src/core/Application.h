@@ -5,6 +5,10 @@
  */
 #pragma once
 
+#include <QUIApplication.h>
+
+#include <memory>
+
 namespace albikar::core {
 
 class Application {
@@ -25,6 +29,9 @@ class Application {
   Application(Application&&) = delete;
   auto operator=(const Application&) -> Application& = delete;
   auto operator=(const Application&&) -> Application& = delete;
+
+ private:
+  static std::unique_ptr<gui::QUIApplication> gui_app_;
 };
 
 }  // namespace albikar::core

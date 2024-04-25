@@ -1,5 +1,5 @@
 include(GitVersion)
-add_version_info(TARGET AlbikarEditor TEMPLATES Version.cc.in)
+add_version_info(TARGET AlbikarEditor TEMPLATES Version.cpp.in)
 
 target_sources(AlbikarEditor PUBLIC
     Application.cpp

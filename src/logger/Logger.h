@@ -43,6 +43,7 @@ namespace albikar {
 class Logger {
  public:
   static auto SetLogger(std::unique_ptr<logger::ILogger> logger) -> void {
+    std::scoped_lock lock{mutex_};
     logger_ = std::move(logger);
   }
 
@@ -52,8 +53,11 @@ class Logger {
                   const std::string& function, fmt::format_string<Args...> s,
                   Args&&... args) -> void {
     std::string formatted_msg = fmt::format(s, std::forward<Args>(args)...);
-    logger_->Log(level, logger_->GetThreadId(), file_name, line, function,
-                 formatted_msg);
+    std::scoped_lock lock{mutex_};
+    if (logger_) {
+      logger_->Log(level, logger_->GetThreadId(), file_name, line, function,
+                   formatted_msg);
+    }
   };
 
  private:

@@ -1,7 +1,6 @@
 message("Building Albikar Editor")
 
 # Qt Setup
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
@@ -26,17 +25,21 @@ target_include_directories(AlbikarEditor PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
+# Code
+target_sources(AlbikarEditor PUBLIC
+    resource.qrc
+)
+
 # Link Qt libraries
 target_link_libraries(AlbikarEditor PRIVATE
-    Qt6::Core
-    Qt6::Widgets
-    Qt6::Qml
-    Qt6::Quick
-    Qt6::QuickControls2)
+    Qt5::Core
+    Qt5::Widgets
+    Qt5::Qml
+    Qt5::Quick
+    Qt5::QuickControls2
+)
 
-# Link libraries
+# Link C++ libraries
 target_link_libraries(AlbikarEditor PRIVATE
-    fmt)
-
-# Set the location of QML files in the build directory
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_BINARY_DIR}" CACHE STRING "" FORCE)
+    fmt
+)

@@ -11,13 +11,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE INTERNAL "")
 set(CMAKE_GNUtoMS ON CACHE INTERNAL "")
 
 # QT Setup
-find_package(Qt6 COMPONENTS 
+find_package(Qt5 COMPONENTS 
     Core
     Widgets
     Qml
     Quick
     QuickControls2
-    REQUIRED)
+    REQUIRED
+)
 
 # Add submodules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")

@@ -3,7 +3,7 @@
  * @copyright Copyright (c) 2024 Dawid Lorenz Development
  * ************************************************************************
  */
-#include "@PREFIX@-Version.h"
+#include "Version.h"
 
 #include <Logger.h>
 
