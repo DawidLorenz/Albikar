@@ -1,0 +1,12 @@
+---
+Language: Cpp
+BasedOnStyle: Microsoft
+Standard: c++23
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 120
+PointerAlignment: Left
+AllowShortIfStatementsOnASingleLine: false
+SortIncludes: true
+...

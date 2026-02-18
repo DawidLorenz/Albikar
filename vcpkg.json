@@ -1,0 +1,18 @@
+{
+  "name": "albikar",
+  "version-string": "0.1.0",
+  "description": "Albikar Vulkan engine/editor bootstrap",
+  "dependencies": [
+    "glfw3",
+    {
+      "name": "imgui",
+      "features": [
+        "glfw-binding",
+        "opengl3-binding"
+      ]
+    },
+    "glm",
+    "fmt",
+    "gtest"
+  ]
+}
