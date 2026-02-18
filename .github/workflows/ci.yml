@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  build-and-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            configure_preset: linux-clang-debug
+            build_preset: build-linux-debug
+            test_preset: test-linux-debug
+          - os: windows-latest
+            configure_preset: windows-clangcl-debug
+            build_preset: build-windows-debug
+            test_preset: test-windows-debug
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ninja
+        uses: seanmiddleditch/gha-setup-ninja@v5
+
+      - name: Setup Clang (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang lld
+
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgDirectory: ${{ github.workspace }}/vcpkg
+
+      - name: Configure
+        env:
+          VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+        run: cmake --preset ${{ matrix.configure_preset }}
+
+      - name: Build
+        env:
+          VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+        run: cmake --build --preset ${{ matrix.build_preset }}
+
+      - name: Test
+        env:
+          VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+        run: ctest --preset ${{ matrix.test_preset }}

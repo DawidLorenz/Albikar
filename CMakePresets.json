@@ -1,0 +1,72 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "linux-clang-debug",
+      "displayName": "Linux Clang Debug + vcpkg",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux-clang-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/cmake/toolchains/clang-linux.cmake"
+      }
+    },
+    {
+      "name": "linux-clang-release",
+      "displayName": "Linux Clang Release + vcpkg",
+      "inherits": "linux-clang-debug",
+      "binaryDir": "${sourceDir}/build/linux-clang-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "windows-clangcl-debug",
+      "displayName": "Windows clang-cl Debug + vcpkg",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/windows-clangcl-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/cmake/toolchains/clang-cl-windows.cmake"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "build-linux-debug",
+      "configurePreset": "linux-clang-debug"
+    },
+    {
+      "name": "build-linux-release",
+      "configurePreset": "linux-clang-release"
+    },
+    {
+      "name": "build-windows-debug",
+      "configurePreset": "windows-clangcl-debug"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "test-linux-debug",
+      "configurePreset": "linux-clang-debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "test-windows-debug",
+      "configurePreset": "windows-clangcl-debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ]
+}
